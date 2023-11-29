@@ -1,0 +1,9 @@
+{
+  "$schema": "https://gitee.com/dotnetchina/Furion/raw/v4/schemas/v4/furion-schema.json",
+
+  "Demo": {
+    "ServerUrl": "http://172.18.79.20:21000", // Grpc Server
+    "GrpcApiUrl": "http://172.18.79.20:21234",
+    "FmsUrl": "http://172.18.79.21:8080"
+  }
+}

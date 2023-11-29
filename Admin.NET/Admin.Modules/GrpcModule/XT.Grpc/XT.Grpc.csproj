@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <Description>1. 创建grpc连接服务
+_channelService.CreateGrpcService&lt;IGroupDataGrpcService&gt;(GlobalVariables.GrpcUrl);</Description>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Grpc.Net.Client" Version="2.57.0" />
+    <PackageReference Include="protobuf-net.Grpc.ClientFactory" Version="1.1.1" />
+    <PackageReference Include="XT.Common" Version="1.1.0" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,114 @@
+﻿using BlazorComponent;
+using BlazorShared.Components.DataTable;
+using BlazorShared.Data.Base;
+
+using GeneralCommon.Interfaces;
+using Masa.Blazor;
+using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Rendering;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
+using GeneralCommon.Extensions;
+using BlazorShared.Helper;
+using static System.Formats.Asn1.AsnWriter;
+
+using Mapster;
+
+
+namespace Admin.NET.Web.Entry.wwwroot.Template;
+public partial class @(@Model.EntityName)Page
+{
+    #region 通用Table代码
+        private AppDataTable<@(@Model.EntityName), Page@(@Model.EntityName)Input, @(@Model.EntityName), @(@Model.EntityName)> _table;
+
+
+
+/// <summary>
+/// 查询
+/// </summary>
+public Page@(@Model.EntityName)Input SearchInput { get; set; } = new Page@(@Model.EntityName)Input();
+
+
+
+
+/// <summary>
+/// 查询数据
+/// </summary>
+/// <param name="input"></param>
+/// <returns></returns>
+private async Task<SqlSugarPagedList<@(@Model.EntityName)>> QueryCall(Page@(@Model.EntityName)Input input)
+{
+    input.Name = input.SearchKey;
+    var result = await @(@Model.EntityName)Manager.GetPage(input);
+
+    if (result.Code == 200)
+    {
+        return result.Result;
+    }
+    else
+    {
+        return new SqlSugarPagedList<@(@Model.EntityName)> { };
+    }
+}
+/// <summary>
+/// 添加用户
+/// </summary>
+/// <param name="input"></param>
+/// <returns></returns>
+private async Task AddCall(@(@Model.EntityName) input)
+{
+    var add = input.Adapt<Add@(@Model.EntityName)Input>();
+    add.MenuIdList = MenuIdList;
+    var result = await @(@Model.EntityName)Manager.Add@(@Model.EntityName)(add);
+    result.ShowMessage(PopupService);
+
+}
+/// <summary>
+/// 删除
+/// </summary>
+/// <param name="users"></param>
+/// <returns></returns>
+private async Task DeleteCall(IEnumerable<@(@Model.EntityName)> users)
+{
+    var result = await @(@Model.EntityName)Manager.Delete@(@Model.EntityName)(new Delete@(@Model.EntityName)Input
+    {
+        Id = users.FirstOrDefault().Id
+    });
+    result.ShowMessage(PopupService);
+}
+/// <summary>
+/// 编辑
+/// </summary>
+/// <param name="user"></param>
+/// <returns></returns>
+private async Task EditCall(@(@Model.EntityName) data)
+{
+    var add = data.Adapt<Update@(@Model.EntityName)Input>();
+    var result = await @(@Model.EntityName)Manager.Update@(@Model.EntityName)(add);
+    result.ShowMessage(PopupService);
+}
+
+
+/// <summary>
+/// 快速搜索
+/// </summary>
+/// <param name="search"></param>
+/// <param name="item"></param>
+/// <returns></returns>
+public bool SearchFilter(string search, @(@Model.EntityName) item)
+{
+    if (search.IsNotNullOrEmpty())
+    {
+        return item.Name.Contains(search);
+    }
+
+    return false;
+
+}
+
+       
+        #endregion
+}

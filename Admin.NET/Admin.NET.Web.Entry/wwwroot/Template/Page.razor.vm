@@ -1,0 +1,41 @@
+﻿@@page "/GeneratePage/@(@Model.EntityName)"
+
+@@using BlazorShared.Layout
+@@using BlazorShared.Components.DataTable
+@@using GeneralCommon.Dtos.Admin.Role
+@@using GeneralCommon.Extensions
+@@attribute [Authorize]
+
+@@inherits CultureComponentBase
+@@layout MainLayout
+@@inject MasaBlazor MasaBlazor
+
+
+                <AppDataTable @@ref="_table" TItem="@(@Model.EntityName)" SearchItem="Page@(@Model.EntityName)Input"
+              AddItem="@(@Model.EntityName)" EditItem="@(@Model.EntityName)" SearchModel="@@SearchInput"
+                              QueryCall="QueryCall" AddCall="AddCall" EditCall="EditCall" DeleteCall="DeleteCall"
+                             
+                              IsShowClearSearch
+                              SearchItemFilter="SearchFilter"
+                            
+                              ShowSelect=false
+                              ShowQueryButton
+                              ShowDetailButton
+                              ShowAddButton=@@UserConfig.IsHasButtonWithRole("@(@Model.EntityName):add")
+                              ShowDeleteButton=@@UserConfig.IsHasButtonWithRole("@(@Model.EntityName):delete")
+                              ShowEditButton=@@UserConfig.IsHasButtonWithRole("@(@Model.EntityName):update")
+                                    IsShowSearchKey>
+
+
+                   
+                 
+
+               
+
+                </AppDataTable>
+
+             
+
+                
+    
+     
