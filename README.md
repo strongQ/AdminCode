@@ -92,8 +92,12 @@
 ## 🍁扩展说明
 1. 新增通讯录和诗集界面。
 2. 新增工作流
-3. 适配goview前端，在web项目中
+3. 适配goview大屏前端，在web项目中
+4. 采用的sqlsugar没有包含数据库驱动，需要自己去安装对应的nuget包
 
+![goview大屏](Doc/goview.png)
+
+![goview大屏](Doc/workflow.png)
 
 
 # 2、GrpcModule
